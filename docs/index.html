@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+    <!-- Link to your external CSS layout -->
+    <link rel="stylesheet">
+</head>
+<body>
+
+    <!-- Your visible content goes here -->
+    <h1>Terms of Service</h1>
+    <p>
+        Last Updated: July 12, 2026.<br>
+        By authorizing Zenless Showcase Bot and using the /register command, you agree to these Terms of Service.
+    </p>
+
+    <h2>1. Description of Service</h2>
+    <p>
+        Zenless Showcase Bot is a Discord integration designed to periodically fetch your Zenless Zone Zero (ZZZ) 
+        account statistics from HoYoverse and display them dynamically on your Discord user profile widget.
+    </p>
+
+    <h2>2. User Responsibilities</h2>
+    <ul>
+        <li>Accurate Information: You are responsible for providing valid ZZZ UIDs and correct ltoken_v2 and ltuid_v2 numeric/string values when using the registration modal.  </li>
+        <li>Account Authorization: By providing these cookies, you grant the Bot permission to access your HoYoverse account data in a read-only capacity to power the widget.</li>
+        <li>OAuth Authorization: You must complete the Discord OAuth authorization link provided upon registration to allow the bot to successfully update your profile.</li>
+    </ul>
+
+    <h2>3. Security Acknowledgment</h2>
+    <p>
+        While the Bot encrypts your session cookies using industry-standard cryptography (Fernet) before storage, 
+        sharing session cookies inherently carries risk. You acknowledge that you are sharing these tokens at 
+        your own risk. The bot developers are not liable for any unauthorized access to your HoYoverse account 
+        or any actions taken by HoYoverse regarding your account status.
+    </p>
+
+    <h2>4. Service Availability and Limitations</h2>
+    <ul>
+        <li>"As Is" Service: The Bot is provided "as is" without warranties of any kind.</li>
+        <li>External Dependencies: The Bot relies heavily on undocumented HoYoverse endpoints and Discord's user profile API. If either HoYoverse or Discord changes their API structures, rate limits, or terms, the Bot may cease to function temporarily or permanently.</li>
+        <li>Rate Limiting: The Bot respects Discord API rate limits and may delay pushing updates to your profile if rate limits are hit.</li>
+    </ul>
+
+    <h2>5. Termination</h2>
+    <p>
+        You may terminate this agreement at any time by running the /unregister command, which deletes your data and halts the service. The bot developers reserve the right 
+        to suspend or terminate your access to the Bot at any time, for any reason, including abuse of the bot's commands or infrastructure.
+    </p>
+
+    <h1>Privacy Policy</h1>
+    <p>
+        Last Updated: July 12, 2026. <br>
+        This Privacy Policy explains how Zenless Showcase Bot ("the Bot") collects, 
+        uses, and protects your information when you use our service to 
+        display Zenless Zone Zero (ZZZ) statistics on your Discord profile.
+    </p>
+
+    <h2>1. Information We Collect</h2>
+    <p>
+        When you use the /register command and link your HoYoverse account, 
+        we collect and store the following information:
+    </p>
+    <ul>
+        <li>Your Discord User ID.</li>
+        <li>Your Zenless Zone Zero (ZZZ) UID.</li>
+        <li>Your HoYoverse session cookies, specifically your ltoken_v2 and ltuid_v2 values.</li>
+        <li>Your preferences for which in-game agents you wish to display in your widget slots.</li>
+    </ul>
+
+    <h2>2. How We Use Your Information</h2>
+    <p>The Bot uses your provided data strictly for the following purposes:</p>
+    <ul>
+        <li>To authenticate with HoYoverse APIs on your behalf to fetch your ZZZ game records, including your account nickname, level, server name, avatar, and unlocked agents.</li>
+        <li>To format these game records and push them to your Discord profile widget using Discord's API.</li>
+    </ul>
+
+    <h2>3. Data Security and Storage</h2>
+    <p>Protecting your HoYoverse account information is a priority:</p>
+    <ul>
+        <li>Your data is stored in a MongoDB database.</li>
+        <li>Your HoYoverse ltoken_v2 and ltuid_v2 cookies are never stored in plaintext within the database.</li>
+        <li>Before being stored, these cookies are symmetrically encrypted using Fernet (AES-128-CBC + HMAC-SHA256).</li>
+        <li>Plaintext cookies are only ever held temporarily in memory during the active process of fetching your game data.</li>
+    </ul>
+
+    <h2>4. Data Deletion and Your Rights</h2>
+    <p>You have full control over your data:</p>
+    <ul>
+        <li>You can opt out of the service at any time by using the /unregister command.</li>
+        <li>Executing this command will immediately and permanently delete your user configuration, UID, and encrypted cookies from our database.</li>
+        <li>Once unregistered, your account will no longer be picked up by automated widget updates.</li>
+    </ul>
+
+    <h2>5. Third-Party Services</h2>
+    <p>To function, the Bot transmits data to two external services:</p>
+    <ul>
+        <li>HoYoverse: Your UID and encrypted cookies are decrypted in memory to request your ZZZ game data from HoYoverse servers.</li>
+        <li>Discord: Your fetched game data is sent to Discord's API to dynamically update the fields on your user profile identity.</li>
+    </ul>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+discord.py>=2.4
+genshin
+motor
+pydantic>=2
+python-dotenv
+aiohttp
+cryptography
+matplotlib
