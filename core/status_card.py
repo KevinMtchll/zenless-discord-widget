@@ -128,7 +128,7 @@ def build_status_card(notes) -> io.BytesIO:
     )
     draw.text(
         COORDS["exp_member_card"],
-        member_card.exp_time,
+        f"Expires in {str(member_card.exp_time)}",
         font=_font_small,
         fill="gray",
     )
