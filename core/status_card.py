@@ -22,13 +22,18 @@ FONT_SIZE_SMALL = 24
 TEXT_COLOR = "white"
 
 COORDS: dict[str, tuple[int, int]] = {
-    "text_battery": (58, 470),
+    "text_battery": (60, 470),
     "battery": (170, 540),
-    "text_engagement": (588, 55),
+
+    "text_engagement": (588, 70),
     "engagement": (1200, 70),
+
+    "text_member_card": (588, 140),
+    "member_card": (1200, 140),
+
     "weekly_task": (374, 35),
     "hollow_bounty": (541, 35),
-    "member_card": (708, 35),
+    
     "temple_running": (875, 35),
 }
 
@@ -93,7 +98,7 @@ def build_status_card(notes) -> io.BytesIO:
 
     draw.text(
         (588,70),
-        f"Engagement Today:",
+        "Engagement Today:",
         font=_font_large,
         fill=TEXT_COLOR,
     )
@@ -101,6 +106,22 @@ def build_status_card(notes) -> io.BytesIO:
     draw.text(
         COORDS["engagement"],
         f"{engagement.current}/{engagement.max}",
+        font=_font_large,
+        fill="yellow",
+    )
+
+
+    draw.text(
+        COORDS["member_card"],
+        "Inter-Knot Membership:",
+        font=_font_large,
+        fill=TEXT_COLOR,
+    )
+    member_card = notes.member_card
+    member_status = "Active" if member_card.is_open else "Inactive"
+    draw.text(
+        COORDS["member_card"],
+        member_status,
         font=_font_large,
         fill="yellow",
     )
@@ -117,15 +138,6 @@ def build_status_card(notes) -> io.BytesIO:
     draw.text(
         COORDS["hollow_bounty"],
         f"{bounty.cur_completed}/{bounty.total}",
-        font=_font_large,
-        fill=TEXT_COLOR,
-    )
-
-    member_card = notes.member_card
-    member_status = "Active" if member_card.is_open else "Inactive"
-    draw.text(
-        COORDS["member_card"],
-        member_status,
         font=_font_large,
         fill=TEXT_COLOR,
     )
