@@ -1,5 +1,5 @@
 """
-probe.py -- quick inspection tool for the shape of objects genshin.py
+probe.py is a quick inspection tool for the shape of objects genshin.py
 returns from HoYoLAB, using your own account cookies. Not part of the
 running bot; run manually when you want to see what fields are available
 on a record before wiring something new into widget.py.
@@ -14,10 +14,7 @@ Usage:
 Output is written to a text file (default: probe_output_<timestamp>.txt
 in the current directory) as well as printed to the console.
 
-Cookies/UID are read from environment variables (see .env additions
-below) rather than Mongo, since this is meant for quick local testing
-against your own account -- it never touches the encrypted values
-stored in production.
+Cookies/UID are read from environment variables.
 
 .env additions this script expects (separate from BOT_TOKEN etc.):
     PROBE_LTOKEN_V2=...

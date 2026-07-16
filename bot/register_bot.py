@@ -40,7 +40,7 @@ async def on_app_command_error(interaction: discord.Interaction, error: app_comm
     """Centralized handler for every slash command's errors means no
     cog needs its own try/except just to catch cooldowns."""
     if isinstance(error, app_commands.CommandOnCooldown):
-        message = f"Slow down a bit -- try again in {error.retry_after:.0f}s."
+        message = f"Slow down a bit, Please try again in {error.retry_after:.0f}s."
     else:
         print(f"Unhandled app command error in {interaction.command}: {error!r}")
         message = "Something went wrong running that command."

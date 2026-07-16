@@ -6,3 +6,4 @@ python-dotenv
 aiohttp
 cryptography
 matplotlib
+pillow

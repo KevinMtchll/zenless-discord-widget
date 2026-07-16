@@ -32,7 +32,7 @@ FIELD_TYPE_NUMBER = 2
 FIELD_TYPE_IMAGE = 3
 
 IMAGE_FIELDS = {"acc_avatar", "agent_1_image", "agent_2_image", "agent_3_image", "agent_4_image"}
-AVATAR_ZOOM_MARGIN_PCT = 12 
+AVATAR_ZOOM_MARGIN_PCT = 13
 
 def _zoomed_avatar_url(avatar_url: str, margin_pct: int = AVATAR_ZOOM_MARGIN_PCT) -> str:
     crop_pct = 100 - (2 * margin_pct)
@@ -134,7 +134,7 @@ def build_agent_slot_fields(agents: list, selected_agent_ids: list[int | None] |
             fields.update({
                 f"agent_{i}_name": agent.name,
                 f"agent_{i}_image": _content_aware_agent_url(agent.square_icon),
-                f"agent_{i}_lvl": f"Lvl. {agent.level} | M{agent.rank}",
+                f"agent_{i}_lvl": f"Lvl. {agent.level} • M{agent.rank}",
             })
         else:
             # Fewer than 4 S/A-rank agents combined -> Leave these fields
