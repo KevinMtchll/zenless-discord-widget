@@ -130,7 +130,7 @@ def build_status_card(notes) -> io.BytesIO:
         COORDS["exp_member_card"],
         member_card.exp_time,
         font=_font_small,
-        fill="grey",
+        fill="gray",
     )
 
     """ weekly = notes.weekly_task
