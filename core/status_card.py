@@ -19,7 +19,9 @@ FONT_PATH = ASSETS_DIR / "status_font.ttf"
 
 FONT_SIZE_LARGE = 48
 FONT_SIZE_SMALL = 24
-TEXT_COLOR = "white"
+LABEL_COLOR = "white"
+VALUE_COLOR = "yellow"
+SUBTEXT_COLOR = "gray"
 
 COORDS: dict[str, tuple[int, int]] = {
     "text_battery": (60, 470),
@@ -71,9 +73,28 @@ def _ensure_loaded() -> None:
 
 
 def _field_str(value) -> str:
-    """Same normalization as currency.py -- some genshin.py fields come
-    back as Enum members rather than plain strings/ints."""
     return value.value if isinstance(value, PyEnum) else value
+
+
+def _days_only(delta) -> str:
+    return str(delta).split(",")[0]
+
+
+def _draw_stat(
+    draw: ImageDraw.ImageDraw,
+    label: str,
+    label_pos: tuple[int, int],
+    value: str,
+    value_pos: tuple[int, int],
+    sub: str | None = None,
+    sub_pos: tuple[int, int] | None = None,
+) -> None:
+    """One row of the card: a label, its value, and an optional gray
+    subtext line underneath (e.g. a refresh/expiry countdown)."""
+    draw.text(label_pos, label, font=_font_large, fill=LABEL_COLOR)
+    draw.text(value_pos, value, font=_font_large, fill=VALUE_COLOR)
+    if sub is not None and sub_pos is not None:
+        draw.text(sub_pos, sub, font=_font_small, fill=SUBTEXT_COLOR)
 
 
 def build_status_card(notes) -> io.BytesIO:
@@ -84,101 +105,59 @@ def build_status_card(notes) -> io.BytesIO:
     img = _bg_template.copy()  # don't mutate the cached template
     draw = ImageDraw.Draw(img)
 
-
-    draw.text(
-        COORDS["text_battery"],
-        "Battery Charge",
-        font=_font_large,
-        fill=TEXT_COLOR,
-    )
     battery = notes.battery_charge
-    draw.text(
-        COORDS["battery"],
+    _draw_stat(
+        draw,
+        "Battery Charge",
+        COORDS["text_battery"],
         f"{battery.current}/{battery.max}",
-        font=_font_large,
-        fill="yellow",
+        COORDS["battery"],
     )
 
-
-    draw.text(
-        (588,70),
-        "Engagement Today:",
-        font=_font_large,
-        fill=TEXT_COLOR,
-    )
     engagement = notes.engagement
-    draw.text(
-        COORDS["engagement"],
+    _draw_stat(
+        draw,
+        "Engagement Today:",
+        COORDS["text_engagement"],
         f"{engagement.current}/{engagement.max}",
-        font=_font_large,
-        fill="yellow",
+        COORDS["engagement"],
     )
 
-
-    draw.text(
-        COORDS["text_member_card"],
-        "Inter-Knot Membership:",
-        font=_font_large,
-        fill=TEXT_COLOR,
-    )
     member_card = notes.member_card
     member_status = "Active" if member_card.is_open else "Inactive"
-    draw.text(
-        COORDS["member_card"],
+    _draw_stat(
+        draw,
+        "Inter-Knot Membership:",
+        COORDS["text_member_card"],
         member_status,
-        font=_font_large,
-        fill="yellow",
+        COORDS["member_card"],
+        sub=f"Expires in {_days_only(member_card.exp_time)}" if member_card.is_open else None,
+        sub_pos=COORDS["exp_member_card"],
     )
-    if member_status == "Active":
-        draw.text(
-            COORDS["exp_member_card"],
-            f"Expires in {str(member_card.exp_time)}",
-            font=_font_small,
-            fill="gray",
-        )
 
-
-    draw.text(
-        COORDS["text_weekly_task"],
-        "Ridu Weekly Points:",
-        font=_font_large,
-        fill=TEXT_COLOR,
-    )
     weekly = notes.weekly_task
-    draw.text(
-        COORDS["weekly_task"],
+    _draw_stat(
+        draw,
+        "Ridu Weekly Points:",
+        COORDS["text_weekly_task"],
         f"{weekly.cur_point}/{weekly.max_point}",
-        font=_font_large,
-        fill="yellow",
-    )
-    draw.text(
-        COORDS["exp_weekly_task"],
-        f"Refreshes in {str(weekly.refresh_time)}",
-        font=_font_small,
-        fill="gray",
+        COORDS["weekly_task"],
+        sub=f"Refreshes in {_days_only(weekly.refresh_time)}",
+        sub_pos=COORDS["exp_weekly_task"],
     )
 
-    draw.text(
-        COORDS["text_hollow_bounty"],
-        "Bounty Commission Progress:",
-        font=_font_large,
-        fill=TEXT_COLOR,
-    )
     bounty = notes.hollow_zero.bounty_commission
-    draw.text(
-        COORDS["hollow_bounty"],
+    _draw_stat(
+        draw,
+        "Bounty Commission Progress:",
+        COORDS["text_hollow_bounty"],
         f"{bounty.cur_completed}/{bounty.total}",
-        font=_font_large,
-        fill="yellow",
-    )
-    draw.text(
-        COORDS["exp_hollow_bounty"],
-        f"Refreshes in {str(bounty.refresh_time)}",
-        font=_font_small,
-        fill="gray",
+        COORDS["hollow_bounty"],
+        sub=f"Refreshes in {_days_only(bounty.refresh_time)}",
+        sub_pos=COORDS["exp_hollow_bounty"],
     )
 
     buf = io.BytesIO()
-    img.save(buf, format="PNG")
+    img.save(buf, format="webp")
     buf.seek(0)
     return buf
