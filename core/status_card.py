@@ -17,9 +17,9 @@ ASSETS_DIR = Path(__file__).resolve().parent.parent / "assets"
 STATUS_BG_PATH = ASSETS_DIR / "status_bg.jpg"
 FONT_PATH = ASSETS_DIR / "status_font.ttf"
 
-FONT_SIZE_LARGE = 24
-FONT_SIZE_SMALL = 16
-TEXT_COLOR = "black"
+FONT_SIZE_LARGE = 48
+FONT_SIZE_SMALL = 24
+TEXT_COLOR = "white"
 
 COORDS: dict[str, tuple[int, int]] = {
     "battery": (183, 540),
