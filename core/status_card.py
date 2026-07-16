@@ -29,7 +29,7 @@ COORDS: dict[str, tuple[int, int]] = {
     "engagement": (1400, 70),
 
     "text_member_card": (588, 140),
-    "exp_member_card": (588, 170),
+    "exp_member_card": (588, 190),
     "member_card": (1400, 140),
 
     "weekly_task": (374, 35),
