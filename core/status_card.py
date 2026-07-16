@@ -26,10 +26,11 @@ COORDS: dict[str, tuple[int, int]] = {
     "battery": (170, 540),
 
     "text_engagement": (588, 70),
-    "engagement": (1200, 70),
+    "engagement": (1400, 70),
 
     "text_member_card": (588, 140),
-    "member_card": (1200, 140),
+    "exp_member_card": (588, 170),
+    "member_card": (1400, 140),
 
     "weekly_task": (374, 35),
     "hollow_bounty": (541, 35),
@@ -112,7 +113,7 @@ def build_status_card(notes) -> io.BytesIO:
 
 
     draw.text(
-        COORDS["member_card"],
+        COORDS["text_member_card"],
         "Inter-Knot Membership:",
         font=_font_large,
         fill=TEXT_COLOR,
@@ -124,6 +125,12 @@ def build_status_card(notes) -> io.BytesIO:
         member_status,
         font=_font_large,
         fill="yellow",
+    )
+    draw.text(
+        COORDS["exp_member_card"],
+        member_card.exp_time,
+        font=_font_small,
+        fill="grey",
     )
 
     """ weekly = notes.weekly_task
