@@ -17,17 +17,17 @@ ASSETS_DIR = Path(__file__).resolve().parent.parent / "assets"
 STATUS_BG_PATH = ASSETS_DIR / "status_bg.webp"
 FONT_PATH = ASSETS_DIR / "status_font.ttf"
 
-FONT_SIZE_LARGE = 42
-FONT_SIZE_SMALL = 24
-TEXT_COLOR = "white"
+FONT_SIZE_LARGE = 24
+FONT_SIZE_SMALL = 16
+TEXT_COLOR = "black"
 
 COORDS: dict[str, tuple[int, int]] = {
-    "battery": (60, 80),
-    "engagement": (60, 160),
-    "weekly_task": (60, 240),
-    "hollow_bounty": (60, 320),
-    "member_card": (60, 400),
-    "temple_running": (60, 480),
+    "battery": (40, 35),
+    "engagement": (207, 35),
+    "weekly_task": (374, 35),
+    "hollow_bounty": (541, 35),
+    "member_card": (708, 35),
+    "temple_running": (875, 35),
 }
 
 # Loaded once at import time rather than per-request.
