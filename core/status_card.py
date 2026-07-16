@@ -26,17 +26,19 @@ COORDS: dict[str, tuple[int, int]] = {
     "battery": (170, 540),
 
     "text_engagement": (588, 70),
-    "engagement": (1400, 70),
+    "engagement": (1600, 70),
 
-    "text_member_card": (588, 150),
-    "exp_member_card": (1400, 200),
-    "member_card": (1400, 150),
+    "text_member_card": (588, 170),
+    "exp_member_card": (1600, 220),
+    "member_card": (1600, 170),
 
-    "text_weekly_task": (588, 230),
-    "weekly_task": (1400, 230),
+    "text_weekly_task": (588, 270),
+    "exp_weekly_task": (1600, 320),
+    "weekly_task": (1600, 270),
 
-    "text_hollow_bounty": (588, 310),
-    "hollow_bounty": (1400, 310),
+    "text_hollow_bounty": (588, 370),
+    "exp_hollow_bounty": (1600, 420),
+    "hollow_bounty": (1600, 370),
 }
 
 # Loaded once at import time rather than per-request.
@@ -149,6 +151,12 @@ def build_status_card(notes) -> io.BytesIO:
         font=_font_large,
         fill="yellow",
     )
+    draw.text(
+        COORDS["exp_weekly_task"],
+        f"Refreshes in {str(weekly.refresh_time)}",
+        font=_font_small,
+        fill="gray",
+    )
 
     draw.text(
         COORDS["text_hollow_bounty"],
@@ -162,7 +170,13 @@ def build_status_card(notes) -> io.BytesIO:
         f"{bounty.cur_completed}/{bounty.total}",
         font=_font_large,
         fill="yellow",
-    ) 
+    )
+    draw.text(
+        COORDS["exp_hollow_bounty"],
+        f"Refreshes in {str(bounty.refresh_time)}",
+        font=_font_small,
+        fill="gray",
+    )
 
     buf = io.BytesIO()
     img.save(buf, format="PNG")
