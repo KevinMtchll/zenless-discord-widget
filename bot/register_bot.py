@@ -7,6 +7,7 @@ as cogs under bot/cogs/:
     bot/cogs/registration.py -- /register, /unregister
     bot/cogs/agents.py       -- /set_agents
     bot/cogs/currency.py     -- /currency
+    bot/cogs/status.py       -- /status
 
 Uses the SAME bot token / application as the widget push in main.py, since
 config.appId (stored per user) has to match the application whose bot
@@ -29,6 +30,7 @@ COGS = [
     "bot.cogs.registration",
     "bot.cogs.agents",
     "bot.cogs.currency",
+    "bot.cogs.status",
 ]
 
 intents = discord.Intents.default()
@@ -40,7 +42,7 @@ async def on_app_command_error(interaction: discord.Interaction, error: app_comm
     """Centralized handler for every slash command's errors means no
     cog needs its own try/except just to catch cooldowns."""
     if isinstance(error, app_commands.CommandOnCooldown):
-        message = f"Slow down a bit, Please try again in {error.retry_after:.0f}s."
+        message = f"Slow down a bit -- try again in {error.retry_after:.0f}s."
     else:
         print(f"Unhandled app command error in {interaction.command}: {error!r}")
         message = "Something went wrong running that command."
