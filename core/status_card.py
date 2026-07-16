@@ -29,13 +29,14 @@ COORDS: dict[str, tuple[int, int]] = {
     "engagement": (1400, 70),
 
     "text_member_card": (588, 140),
-    "exp_member_card": (588, 190),
+    "exp_member_card": (1400, 190),
     "member_card": (1400, 140),
 
-    "weekly_task": (374, 35),
-    "hollow_bounty": (541, 35),
-    
-    "temple_running": (875, 35),
+    "text_weekly_task": (588, 210),
+    "weekly_task": (1400, 210),
+
+    "text_hollow_bounty": (588, 280),
+    "hollow_bounty": (1400, 280),
 }
 
 # Loaded once at import time rather than per-request.
@@ -126,36 +127,42 @@ def build_status_card(notes) -> io.BytesIO:
         font=_font_large,
         fill="yellow",
     )
-    draw.text(
-        COORDS["exp_member_card"],
-        f"Expires in {str(member_card.exp_time)}",
-        font=_font_small,
-        fill="gray",
-    )
+    if member_status == "Active":
+        draw.text(
+            COORDS["exp_member_card"],
+            f"Expires in {str(member_card.exp_time)}",
+            font=_font_small,
+            fill="gray",
+        )
 
-    """ weekly = notes.weekly_task
+
+    draw.text(
+        COORDS["text_weekly_task"],
+        "Ridu Weekly Points:",
+        font=_font_large,
+        fill=TEXT_COLOR,
+    )
+    weekly = notes.weekly_task
     draw.text(
         COORDS["weekly_task"],
         f"{weekly.cur_point}/{weekly.max_point}",
         font=_font_large,
-        fill=TEXT_COLOR,
+        fill="yellow",
     )
 
+    draw.text(
+        COORDS["text_hollow_bounty"],
+        "Bounty Commission Progress:",
+        font=_font_large,
+        fill=TEXT_COLOR,
+    )
     bounty = notes.hollow_zero.bounty_commission
     draw.text(
         COORDS["hollow_bounty"],
         f"{bounty.cur_completed}/{bounty.total}",
         font=_font_large,
-        fill=TEXT_COLOR,
-    )
-
-    temple = notes.temple_running
-    draw.text(
-        COORDS["temple_running"],
-        f"Lvl {temple.level}",
-        font=_font_large,
-        fill=TEXT_COLOR,
-    ) """
+        fill="yellow",
+    ) 
 
     buf = io.BytesIO()
     img.save(buf, format="PNG")
