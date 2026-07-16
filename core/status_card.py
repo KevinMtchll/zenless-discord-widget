@@ -22,9 +22,9 @@ FONT_SIZE_SMALL = 24
 TEXT_COLOR = "white"
 
 COORDS: dict[str, tuple[int, int]] = {
-    "text_battery": (60,480),
+    "text_battery": (55, 470),
     "battery": (170, 540),
-    "text_engagement": (588,60),
+    "text_engagement": (588, 55),
     "engagement": (1200, 60),
     "weekly_task": (374, 35),
     "hollow_bounty": (541, 35),
