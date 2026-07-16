@@ -22,10 +22,10 @@ FONT_SIZE_SMALL = 24
 TEXT_COLOR = "white"
 
 COORDS: dict[str, tuple[int, int]] = {
-    "text_battery": (100,480),
+    "text_battery": (50,480),
     "battery": (170, 540),
-    "text_engagement": (588,70),
-    "engagement": (1200, 70),
+    "text_engagement": (588,50),
+    "engagement": (1200, 50),
     "weekly_task": (374, 35),
     "hollow_bounty": (541, 35),
     "member_card": (708, 35),
@@ -102,7 +102,7 @@ def build_status_card(notes) -> io.BytesIO:
         COORDS["engagement"],
         f"{engagement.current}/{engagement.max}",
         font=_font_large,
-        fill=TEXT_COLOR,
+        fill="yellow",
     )
 
     """ weekly = notes.weekly_task
