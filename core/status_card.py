@@ -28,15 +28,15 @@ COORDS: dict[str, tuple[int, int]] = {
     "text_engagement": (588, 70),
     "engagement": (1400, 70),
 
-    "text_member_card": (588, 140),
-    "exp_member_card": (1400, 190),
-    "member_card": (1400, 140),
+    "text_member_card": (588, 150),
+    "exp_member_card": (1400, 200),
+    "member_card": (1400, 150),
 
-    "text_weekly_task": (588, 210),
-    "weekly_task": (1400, 210),
+    "text_weekly_task": (588, 220),
+    "weekly_task": (1400, 220),
 
-    "text_hollow_bounty": (588, 280),
-    "hollow_bounty": (1400, 280),
+    "text_hollow_bounty": (588, 290),
+    "hollow_bounty": (1400, 290),
 }
 
 # Loaded once at import time rather than per-request.
