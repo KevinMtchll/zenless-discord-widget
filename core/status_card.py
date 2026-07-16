@@ -14,7 +14,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ASSETS_DIR = Path(__file__).resolve().parent.parent / "assets"
-STATUS_BG_PATH = ASSETS_DIR / "status_bg.webp"
+STATUS_BG_PATH = ASSETS_DIR / "status_bg.jpg"
 FONT_PATH = ASSETS_DIR / "status_font.ttf"
 
 FONT_SIZE_LARGE = 24
@@ -22,8 +22,8 @@ FONT_SIZE_SMALL = 16
 TEXT_COLOR = "black"
 
 COORDS: dict[str, tuple[int, int]] = {
-    "battery": (40, 35),
-    "engagement": (207, 35),
+    "battery": (183, 540),
+    "engagement": (988, 70),
     "weekly_task": (374, 35),
     "hollow_bounty": (541, 35),
     "member_card": (708, 35),
@@ -73,19 +73,33 @@ def build_status_card(notes) -> io.BytesIO:
     img = _bg_template.copy()  # don't mutate the cached template
     draw = ImageDraw.Draw(img)
 
+
+    draw.text(
+        (183,504),
+        f"Battery Charge",
+        font=_font_large,
+        fill=TEXT_COLOR,
+    )
     battery = notes.battery_charge
     draw.text(
         COORDS["battery"],
         f"{battery.current}/{battery.max}",
         font=_font_large,
-        fill=TEXT_COLOR,
+        fill="yellow",
     )
 
+
+    draw.text(
+        (588,70),
+        f"Engagement Today:",
+        font=_font_large,
+        fill=TEXT_COLOR,
+    )
     engagement = notes.engagement
     draw.text(
         COORDS["engagement"],
         f"{engagement.current}/{engagement.max}",
-        font=_font_small,
+        font=_font_large,
         fill=TEXT_COLOR,
     )
 
@@ -93,7 +107,7 @@ def build_status_card(notes) -> io.BytesIO:
     draw.text(
         COORDS["weekly_task"],
         f"{weekly.cur_point}/{weekly.max_point}",
-        font=_font_small,
+        font=_font_large,
         fill=TEXT_COLOR,
     )
 
@@ -101,7 +115,7 @@ def build_status_card(notes) -> io.BytesIO:
     draw.text(
         COORDS["hollow_bounty"],
         f"{bounty.cur_completed}/{bounty.total}",
-        font=_font_small,
+        font=_font_large,
         fill=TEXT_COLOR,
     )
 
@@ -110,7 +124,7 @@ def build_status_card(notes) -> io.BytesIO:
     draw.text(
         COORDS["member_card"],
         member_status,
-        font=_font_small,
+        font=_font_large,
         fill=TEXT_COLOR,
     )
 
@@ -118,7 +132,7 @@ def build_status_card(notes) -> io.BytesIO:
     draw.text(
         COORDS["temple_running"],
         f"Lvl {temple.level}",
-        font=_font_small,
+        font=_font_large,
         fill=TEXT_COLOR,
     )
 
